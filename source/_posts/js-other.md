@@ -75,3 +75,31 @@ parseInt(string, radix);
 
 算术上，`NaN`不是任何一个进制下的数。你可以调用`isNaN`来判断`parseInt`是否返回`NaN`。`NaN`参与的数学运算其结果总是`NaN`。
 将整型数值以特定基数转换成它的字符串值可以使用`intValue.toString(radix)`.
+
+## null与undefined
+值`null`是一个 JavaScript 字面量，表示空值（null or an "empty" value），即没有对象被呈现（no object value is present）。它是JavaScript原始数据类型之一。
+
+全局属性`undefined`表示原始值`undefined`。它是一个JavaScript的原始数据类型 。
+JavaScript的原始数据类型：`String`,`Number`,`Bollean`,`null`,`undefined`,`symbol`(ES2015新增)
+
+`null`与`undefined`的不同点：
+```
+typeof null        // object (因为一些以前的原因而不是'null')
+typeof undefined   // undefined
+null === undefined // false
+null  == undefined // true
+null === null // true
+null == null // true
+!null //true
+isNaN(1 + null) // false
+isNaN(1 + undefined) // true
+```
+
+## js精度丢失
+计算机的二进制实现和位数限制有些数无法有限表示。就像一些无理数不能有限表示，如 圆周率 3.1415926...，1.3333... 等。JS 遵循 IEEE 754 规范，采用双精度存储（double precision），占用 64 bit。
+解决方案：
+- 对于整数，前端出现问题的几率可能比较低，毕竟很少有业务需要需要用到超大整数，只要运算结果不超过 Math.pow(2, 53) 就不会丢失精度。
+- 对于小数，前端出现问题的几率还是很多的，尤其在一些电商网站涉及到金额等数据。解决方式：把小数放到位整数（乘倍数），再缩小回原来倍数（除倍数）
+
+## switch
+`switch()`使用`===`判断相等
