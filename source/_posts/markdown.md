@@ -87,6 +87,13 @@ Mike |  32
 # 七、转义
 Markdown符号用反斜杠\\转义
 
+______________
+2017.08.15更新
+______________
+
+# 八、横线
+在一行中用三个以上的星号(*)、减号(-)、下划线(_)来建立一个分隔线；除空格外行内不能有其他字符；（除第一个符号的左侧最多添加三个空格外）三个相同符号两侧可以添加任意多个空格。
+
 # 参考文献
 1. [Markdown教程](https://kennylee26.gitbooks.io/markdown/content/grammar/Inline-HTML.html)
 2. [Markdown 编辑器语法指南](https://segmentfault.com/markdown#articleHeader7)
