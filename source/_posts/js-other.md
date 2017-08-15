@@ -43,6 +43,10 @@ categories:
 - SD9010: 仅 IE 中的 createElement 方法支持传入 HTML String 做参数
 - SD9006: IE 混淆了 DOM 对象属性（property）及 HTML 标签属性（attribute），造成了对 setAttribute、getAttribute 的不正确实现
 
+_____________
+2017.08.15更新
+_____________
+
 ## parseInt()
 parseInt() 函数解析一个字符串参数，并返回一个指定基数的整数 (数学系统的基础)。
 
