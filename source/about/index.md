@@ -14,8 +14,5 @@ CN: 巩志彬(gongzhibin) | EN: zxlg
 
 # Contact
 微博: [机智的老巩](http://weibo.com/zxlg1993)
-Lofter: [机智的老巩](http://cleverlg.lofter.com/)
 Github: [gongzhibin](https://github.com/gongzhibin)
-Twitter：[lao巩](https://twitter.com/gzb19930714)
-Facebook：[巩志彬](https://www.facebook.com/zxlg1993)
 邮箱: zxlg1993@gmail.com
