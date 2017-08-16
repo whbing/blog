@@ -1,5 +1,5 @@
 ---
-title: js-puzzlers
+title: JavaScript Puzzlers解析
 date: 2017-08-12 21:22:18
 tags:
 	- js
@@ -204,3 +204,469 @@ D.undefined
 ```
 考察`String()`方法和判等
 `String('A')`没有新建一个对象，而是返回一个`String`，所以选A
+
+______________
+2017.08.16更新
+______________
+### 11.What is the result of this expression? (or multiple ones)
+```
+function isOdd(num) {
+    return num % 2 == 1;
+}
+function isEven(num) {
+    return num % 2 == 0;
+}
+function isSane(num) {
+    return isEven(num) || isOdd(num);
+}
+var values = [7, 4, '13', -9, Infinity];
+values.map(isSane);
+
+A.[true, true, true, true, true]
+B.[true, true, true, true, false]
+C.[true, true, true, false, false]
+D.[true, true, false, false, false]
+```
+考察取余操作符
+取余操作符保证符号，所以`-9 % 2 == -1 ，Infinity % 2 == NaN`
+所以选C
+
+### 12.What is the result of this expression? (or multiple ones)
+``` 
+parseInt(3, 8)
+parseInt(3, 2)
+parseInt(3, 0)
+        
+A.3, 3, 3
+B.3, 3, NaN
+C.3, NaN, NaN
+D.other
+```
+考察`parseInt()`函数，分析见第1题，答案应该为`3,NaN,3` 所以选D
+
+### 13.What is the result of this expression? (or multiple ones)
+```
+Array.isArray( Array.prototype )
+        
+A.true
+B.false
+C.error
+D.other
+```
+考察`Array.prototype`，是数组，所以选A
+
+### 14.What is the result of this expression? (or multiple ones)
+```
+var a = [0];
+if ([0]) {
+  console.log(a == true);
+} else {
+  console.log("wut");
+}
+        
+A.true
+B.false
+C."wut"
+D.other
+```
+考察`if()`和判等,见[js相等性比较](http://happylg.cn/2017/08/04/js-equal/)
+`if([])`都会执行，所以`if([0])`更会执行，对象和布尔值比较，布尔值转换为数字，对象转换为原始值比较,`[0] == true // false`
+所以选B
+
+### 15.What is the result of this expression? (or multiple ones)
+``` 
+[]==[]
+        
+A.true
+B.false
+C.error
+D.other
+```
+考察相等性比较，见[js相等性比较](http://happylg.cn/2017/08/04/js-equal/)
+对象和对象比较，引用相同返回`true`,否则返回`false`,所以选B
+
+### 16.What is the result of this expression? (or multiple ones)
+```   
+'5' + 3
+'5' - 3
+   
+A."53", 2
+B.8, 2
+C.error
+D.other
+```
+考察`+`,`-`运算符,字符串会使用`+`运算符做连接，但是遇到`-`则转换为数值进行运算
+所以选A 
+
+### 17.What is the result of this expression? (or multiple ones)
+```    
+1 + - + + + - + 1
+        
+A.2
+B.1
+C.error
+D.other
+```
+考察一元`+, -`
+中间一元加号不影响，两个一元减号负负得正变加号,所以选A
+
+### 18.What is the result of this expression? (or multiple ones)
+```
+var ary = Array(3);
+ary[0]=2
+ary.map(function(elem) { return '1'; });
+        
+A.[2, 1, 1]
+B.["1", "1", "1"]
+C.[2, "1", "1"]
+D.other
+```
+考察`map`函数
+删除或未赋值的元素不会被遍历到，所以选D
+
+### 19.What is the result of this expression? (or multiple ones)
+```      
+function sidEffecting(ary) {
+  ary[0] = ary[2];
+}
+function bar(a,b,c) {
+  c = 10
+  sidEffecting(arguments);
+  return a + b + c;
+}
+bar(1,1,1)
+        
+A.3
+B.12
+C.error
+D.other
+```
+考察函数的`arguments`
+函数的`arguments`与参数是相对应的，但不是同一片内存空间，所以答案为21，选D
+
+### 20.What is the result of this expression? (or multiple ones)
+```  
+var a = 111111111111111110000,
+    b = 1111;
+a + b;
+        
+A.111111111111111111111
+B.111111111111111110000
+C.NaN
+D.Infinity
+```
+考察js的大数精度
+js中的大数精度也缺失了，选B 
+
+### 21.What is the result of this expression? (or multiple ones)
+```
+var x = [].reverse;
+x();
+
+A.[]
+B.undefined
+C.error
+D.window
+```
+题目基于ECMA 262 (5.1)的浏览器环境，`[].reverse`返回`this`，被浏览器调用之后为`window`。
+选D
+
+### 22.What is the result of this expression? (or multiple ones)
+```   
+Number.MIN_VALUE > 0
+        
+A.false
+B.true
+C.error
+D.other
+```
+考察`Number`
+`Number.MIN_VALUE`是大于0的最小数，所以选B
+
+### 23.What is the result of this expression? (or multiple ones)
+```
+[1 < 2 < 3, 3 < 2 < 1]
+        
+A.[true, true]
+B.[true, false]
+C.error
+D.other
+```
+考察`<`运算符
+`(1 < 2) < 3`,`1 < 2 //true 转换为1` `1 < 3 // true`
+`(3 < 2) < 1`,`3 < 2 //false 转换为0` `0 < 1 //true`
+所以选A
+
+### 24.What is the result of this expression? (or multiple ones)
+```   
+// the most classic wtf
+2 == [[[2]]]
+        
+A.true
+B.false
+C.undefined
+D.other
+```
+考察`==`
+对象和其他值比较时，会将对象转换为原始值，`[[[2]]]`转换原始值为2
+所以返回`true`
+
+### 25.What is the result of this expression? (or multiple ones)
+```
+3.toString()
+3..toString()
+3...toString()
+        
+A."3", error, error
+B."3", "3.0", error
+C.error, "3", error
+D.other
+```
+
+
+### 26.What is the result of this expression? (or multiple ones)
+
+          
+(function(){
+  var x = y = 1;
+})();
+console.log(y);
+console.log(x);
+        
+1, 1
+error, error
+1, error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = /123/,
+    b = /123/;
+a == b
+a === b
+        
+true, true
+true, false
+false, false
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = [1, 2, 3],
+    b = [1, 2, 3],
+    c = [1, 2, 4]
+a ==  b
+a === b
+a >   c
+a <   c
+        
+false, false, false, true
+false, false, false, false
+true, true, false, true
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = {}, b = Object.prototype;
+[a.prototype === b, Object.getPrototypeOf(a) === b]
+        
+[false, true]
+[true, true]
+[false, false]
+other
+
+
+What is the result of this expression? (or multiple ones)
+
+          
+function f() {}
+var a = f.prototype, b = Object.getPrototypeOf(f);
+a === b
+        
+true
+false
+null
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+function foo() { }
+var oldName = foo.name;
+foo.name = "bar";
+[oldName, foo.name]
+        
+error
+["", ""]
+["foo", "foo"]
+["foo", "bar"]
+
+What is the result of this expression? (or multiple ones)
+
+          
+"1 2 3".replace(/\d/g, parseInt)
+        
+"1 2 3"
+"0 1 2"
+"NaN 2 3"
+"1 NaN 3"
+
+What is the result of this expression? (or multiple ones)
+
+          
+function f() {}
+var parent = Object.getPrototypeOf(f);
+f.name // ?
+parent.name // ?
+typeof eval(f.name) // ?
+typeof eval(parent.name) //  ?
+        
+"f", "Empty", "function", "function"
+"f", undefined, "function", error
+"f", "Empty", "function", error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var lowerCaseOnly =  /^[a-z]+$/;
+[lowerCaseOnly.test(null), lowerCaseOnly.test()]
+        
+[true, false]
+error
+[true, true]
+[false, true]
+
+What is the result of this expression? (or multiple ones)
+
+          
+[,,,].join(", ")
+        
+", , , "
+"undefined, undefined, undefined, undefined"
+", , "
+""
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = {class: "Animal", name: 'Fido'};
+a.class
+        
+"Animal"
+Object
+an error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = new Date("epoch")
+        
+Thu Jan 01 1970 01:00:00 GMT+0100 (CET)
+current time
+error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = Function.length,
+    b = new Function().length
+a === b
+        
+true
+false
+error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = Date(0);
+var b = new Date(0);
+var c = new Date();
+[a === b, b === c, a === c]
+        
+[true, true, true]
+[false, false, false]
+[false, true, false]
+[true, false, false]
+
+What is the result of this expression? (or multiple ones)
+
+          
+var min = Math.min(), max = Math.max()
+min < max
+        
+true
+false
+error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+function captureOne(re, str) {
+  var match = re.exec(str);
+  return match && match[1];
+}
+var numRe  = /num=(\d+)/ig,
+    wordRe = /word=(\w+)/i,
+    a1 = captureOne(numRe,  "num=1"),
+    a2 = captureOne(wordRe, "word=1"),
+    a3 = captureOne(numRe,  "NUM=2"),
+    a4 = captureOne(wordRe,  "WORD=2");
+[a1 === a2, a3 === a4]
+        
+[true, true]
+[false, false]
+[true, false]
+[false, true]
+
+What is the result of this expression? (or multiple ones)
+
+          
+var a = new Date("2014-03-19"),
+    b = new Date(2014, 03, 19);
+[a.getDay() === b.getDay(), a.getMonth() === b.getMonth()]
+        
+[true, true]
+[true, false]
+[false, true]
+[false, false]
+
+What is the result of this expression? (or multiple ones)
+
+          
+if ('http://giftwrapped.com/picture.jpg'.match('.gif')) {
+  'a gif file'
+} else {
+  'not a gif file'
+}
+        
+'a gif file'
+'not a gif file'
+error
+other
+
+What is the result of this expression? (or multiple ones)
+
+          
+function foo(a) {
+    var a;
+    return a;
+}
+function bar(a) {
+    var a = 'bye';
+    return a;
+}
+[foo('hello'), bar('hello')]
+        
+["hello", "hello"]
+["hello", "bye"]
+["bye", "bye"]
+other
