@@ -2,9 +2,10 @@
 title: 前端面试总结
 date: 2017-08-09 10:31:06
 tags:
+    - 前端
     - interview
 categories:
-	- 前端
+	- Interview
 ---
 
 # 一、开放性题目
