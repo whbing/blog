@@ -15,8 +15,8 @@ ______________
 ## 01背包
 ### 状态
 `dp[i][j]`表示前i个物品装到剩余容量为j时的最大价值
-### 分析
-状态转移方程：`dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1])`
+### 状态转移方程
+`dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1])`
 第`i`个物品装或者不装入背包，不装价值为`dp[i-1][j]`,装表示剩下`i-1`个物品装入`j-weight[i-1]`重的最大价值，加上`value[i-1]`
 注意讨论前`i`个物品装入背包的时候， 其实是在考查第`i-1`个物品装不装入背包（因为物品是从0开始编号的）
 <!--more-->
@@ -59,8 +59,8 @@ public class Pack_01 {
 ## 完全背包
 ### 状态
 `dp[i][j]`表示前i个物品装到剩余容量为j时的最大价值
-### 分析
-状态转移方程：`dp[i][j] = max(dp[i - 1][j - num * weight[i - 1]] + num * value[i - 1]) (0<=num * weight[i - 1]<=j)`
+### 状态转移方程
+`dp[i][j] = max(dp[i - 1][j - num * weight[i - 1]] + num * value[i - 1]) (0<=num * weight[i - 1]<=j)`
 ### 代码
 ```
 public class Pack_full {
@@ -93,8 +93,66 @@ public class Pack_full {
 	}
 }
 ```
+______________
+2017.08.18更新
+______________
+
+## 硬币找零(方案数)
+### 状态
+`dp[i][j`]表示使用`changes[0-i]`硬币兑换`j`元的方法总数
+### 分析
+使用i=0的钱币兑换，只有changes[0]的整数倍的金额才能有1种方法
+`dp[0][j * changes[0]] = 1`
+### 状态转移方程
+不装入第i种钱币，即使用0~i-1种钱币组成j的方法数；装入i钱币，使用0~i的钱币组成j-changes[i]金额的方法数
+`dp[i][j] = dp[i - 1][j] +  dp[i][j - changes[i]]`
+### 代码
+```
+//链接：https://www.nowcoder.com/questionTerminal/185dc37412de446bbfff6bd21e4356ec
+//来源：牛客网
+//
+//有一个数组changes，changes中所有的值都为正数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，对于一个给定值x，请设计一个高效算法，计算组成这个值的方案数。
+//给定一个int数组changes，代表所以零钱，同时给定它的大小n，另外给定一个正整数x，请返回组成x的方案数，保证n小于等于100且x小于等于10000。
+//测试样例：
+//[5,10,25,1],4,15
+//返回：
+//6
+
+public class ChangeMoney {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] changes = { 5, 10, 25, 1 };
+		int n = 4;
+		int money = 15;
+		int res = change(changes, n, money);
+		System.out.println(res);
+
+	}
+
+	public static int change(int[] changes, int n, int money) {
+		int[][] dp = new int[n][money + 1];// dp[i][j]表示使用changes[0-i]硬币兑换j元的方法总数。
+		for (int i = 0; i < n; i++) { // j=0表示钱为0，组成0元的方法数为1
+			dp[i][0] = 1;
+		}
+		for (int j = 0; j * changes[0] < money + 1; j++) {// 使用i=0的钱币兑换，只有changes[0]的整数倍的金额才能有1种方法
+			dp[0][j * changes[0]] = 1;
+		}
+		// 填表
+		for (int i = 1; i < dp.length; i++) {// 数组长度1~n-1在changes数组中有效
+			for (int j = 1; j < dp[0].length; j++) {
+				// 不装入第i种钱币，即使用0~i-1种钱币组成j的方法数；装入i钱币，使用0~i的钱币组成j-changes[i]金额的方法数
+				dp[i][j] = dp[i - 1][j] + (j - changes[i] >= 0 ? dp[i][j - changes[i]] : 0);
+			}
+		}
+		return dp[n - 1][money];
+	}
+}
+```
+## 硬币找零(最少硬币数)
 ## 多重背包
 
+## 最长子序列
 ## 参考文献
 1. [背包问题九讲](http://love-oriented.com/pack/)
 2. [动态规划之背包问题](http://www.hawstein.com/posts/dp-knapsack.html)
