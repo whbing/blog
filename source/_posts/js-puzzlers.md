@@ -1,8 +1,7 @@
 ---
 title: JavaScript Puzzlers解析
 date: 2017-08-12 21:22:18
-tags:
-	- js
+tags: [js]
 categories:
 	- Javascript
 ---
@@ -30,7 +29,7 @@ parseInt('2',1)//每个位上的数字不能比基数大，且基数不能为1,�
 parseInt('3',2)//每个位上的数字不能比基数大,返回NaN
 ```
 所以选D
-
+<!--more-->
 ### 2.What is the result of this expression? (or multiple ones)
 ```          
 [typeof null, null instanceof Object]
@@ -411,6 +410,9 @@ D.other
 对象和其他值比较时，会将对象转换为原始值，`[[[2]]]`转换原始值为2
 所以返回`true`
 
+______________
+2017.08.17更新
+______________
 ### 25.What is the result of this expression? (or multiple ones)
 ```
 3.toString()

@@ -1,11 +1,7 @@
 ---
 title: 阿里巴巴在线笔试
 date: 2017-08-17 18:23:35
-tags:
-	- js
-    - html
-    - css
-    - interview
+tags: [js,html,css,interview]
 categories:
 	- Interview
 ---
@@ -17,7 +13,7 @@ categories:
 - 电话号码 (number)
 - 省份 (province)
 
-## 要求：
+## 要求
 1. 不能借助任何三方库，需使用原生代码实现
 2. 结合给出的基本代码结构，在下方2处code here处补充代码，完成买家信息的删除功能，注意此页面需要在手机上清晰显示。
 3. js代码可任意调整，例如可使用es6语法完成
