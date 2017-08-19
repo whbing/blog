@@ -33,6 +33,6 @@ Jekyll now ignores the vendor and node_modules directories by default.
 2. 添加canvas
 3. 添加文章更新时间
 
-## 参考文献：
+## 参考文献
 1. [NexT主题升级](https://github.com/iissnan/hexo-theme-next/issues/328)
 2. [vendors文件夹处理](https://github.com/iissnan/hexo-theme-next/issues/1214)
