@@ -104,3 +104,5 @@ search:
 #增加sitemap
 sitemap:
     path: sitemap.xml
+
+disqus_shortname: happylg
