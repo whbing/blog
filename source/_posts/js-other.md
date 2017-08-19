@@ -26,6 +26,7 @@ categories:
 		function foo() {}
 	}
 	```
+<!-- more -->
 4. Jquery获取宽高
 	```
 	alert($(window).height()); //浏览器当前窗口可视区域高度 

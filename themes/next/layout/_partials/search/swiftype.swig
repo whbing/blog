@@ -1,5 +1,5 @@
 <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" autocomplete="off" autocorrect="off" autocapitalize="off">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
 </form>
 
 <script type="text/javascript">

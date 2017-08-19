@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zxlg's notes" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="JavaScript Puzzlers!，题目基于ECMA 262 (5.1)的浏览器环境  2017.08.15更新  1.What is the result of this expression? (or multiple ones)123456[&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;].map(parseInt)        A.[&amp;quo">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Puzzlers解析">
+<meta property="og:url" content="http://happylg.cn/2017/08/12/js-puzzlers/index.html">
+<meta property="og:site_name" content="zxlg&#39;s notes">
+<meta property="og:description" content="JavaScript Puzzlers!，题目基于ECMA 262 (5.1)的浏览器环境  2017.08.15更新  1.What is the result of this expression? (or multiple ones)123456[&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;].map(parseInt)        A.[&amp;quo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-19T06:37:33.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript Puzzlers解析">
+<meta name="twitter:description" content="JavaScript Puzzlers!，题目基于ECMA 262 (5.1)的浏览器环境  2017.08.15更新  1.What is the result of this expression? (or multiple ones)123456[&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;].map(parseInt)        A.[&amp;quo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://happylg.cn/2017/08/12/js-puzzlers/"/>
+
+
+
+
+
+  <title>JavaScript Puzzlers解析 | zxlg's notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zxlg's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://happylg.cn/2017/08/12/js-puzzlers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zxlg">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zxlg's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript Puzzlers解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T21:22:18+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/12/js-puzzlers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/12/js-puzzlers/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/12/js-puzzlers/" class="leancloud_visitors" data-flag-title="JavaScript Puzzlers解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="external">JavaScript Puzzlers!</a>，题目基于ECMA 262 (5.1)的浏览器环境</p>
+<hr>
+<p>2017.08.15更新</p>
+<hr>
+<h3 id="1-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#1-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="1.What is the result of this expression? (or multiple ones)"></a>1.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;].map(parseInt)</div><div class="line">        </div><div class="line">A.[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</div><div class="line">B.[1, 2, 3]</div><div class="line">C.[0, 1, 2]</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>map</code>和<code>parseInt</code><br><code>Array.prototype.map()</code>接收三个参数<code>(element,index,Array)</code><br><code>parseInt()</code>接收两个参数<code>(val,radix)</code>,<code>radix</code>为基数，<code>parseInt(&#39;17&#39;,8) //15</code>,<code>radix</code>为0或无表示以10为基数。每个位上的数字不能比基数大，否则返回<code>NaN</code>,<code>radix</code>不能为1,范围为2-36。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parseInt(&apos;1&apos;,0)//1</div><div class="line">parseInt(&apos;2&apos;,1)//每个位上的数字不能比基数大，且基数不能为1,返回NaN</div><div class="line">parseInt(&apos;3&apos;,2)//每个位上的数字不能比基数大,返回NaN</div></pre></td></tr></table></figure></p>
+<p>所以选D<br><a id="more"></a></p>
+<h3 id="2-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#2-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="2.What is the result of this expression? (or multiple ones)"></a>2.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[typeof null, null instanceof Object]</div><div class="line">        </div><div class="line">A.[&quot;object&quot;, false]</div><div class="line">B.[null, false]</div><div class="line">C.[&quot;object&quot;, true]</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>typeof</code>和<code>instanceof</code><br><code>typeof</code>检测非基本对象时，均返回<code>object</code><br><code>null</code>为基本类型，所以<code>null instanceof Object // false</code><br>选A</p>
+<h3 id="3-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#3-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="3.What is the result of this expression? (or multiple ones)"></a>3.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[ [3,2,1].reduce(Math.pow), [].reduce(Math.pow) ]</div><div class="line">        </div><div class="line">A.an error</div><div class="line">B.[9, 0]</div><div class="line">C.[9, NaN]</div><div class="line">D.[9, undefined]</div></pre></td></tr></table></figure>
+<p>考察<code>reduce</code>函数的用法<br><code>Array.prototype.reduce()</code>接收两个参数<code>(function(accumulator, currentValue, currentIndex, array), initialValue)</code>空数组调用<code>reduce</code>时没有设置初始值将会报错。<br>所以选A</p>
+<h3 id="4-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#4-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="4.What is the result of this expression? (or multiple ones)"></a>4.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var val = &apos;smtg&apos;;</div><div class="line">console.log(&apos;Value is &apos; + (val === &apos;smtg&apos;) ? &apos;Something&apos; : &apos;Nothing&apos;);</div><div class="line">        </div><div class="line">A.Value is Something</div><div class="line">B.Value is Nothing</div><div class="line">C.NaN</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察运算符优先级，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="external">MDN运算符优先级表</a><br>+(13级)优先级大于？(3级),所以<code>&#39;Value is &#39; + (val === &#39;smtg&#39;)</code>条件判断为<code>true</code>，答案为<code>&#39;Something&#39;</code>,选D</p>
+<h3 id="5-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#5-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="5.What is the result of this expression? (or multiple ones)"></a>5.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var name = &apos;World!&apos;;</div><div class="line">(function () &#123;</div><div class="line">    if (typeof name === &apos;undefined&apos;) &#123;</div><div class="line">        var name = &apos;Jack&apos;;</div><div class="line">        console.log(&apos;Goodbye &apos; + name);</div><div class="line">    &#125; else &#123;</div><div class="line">        console.log(&apos;Hello &apos; + name);</div><div class="line">    &#125;</div><div class="line">&#125;)();</div><div class="line">        </div><div class="line">A.Goodbye Jack</div><div class="line">B.Hello Jack</div><div class="line">C.Hello undefined</div><div class="line">D.Hello World</div></pre></td></tr></table></figure>
+<p>考察<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var" target="_blank" rel="external">变量声明提升</a>（var hoisting）<br>由于变量声明（以及其他声明）总是在任意代码执行之前处理的，所以在代码中的任意位置声明变量总是等效于在代码开头声明。这意味着变量可以在声明之前使用，这个行为叫做“hoisting”。“hoisting”就像是把所有的变量声明移动到函数或者全局代码的开头位置。<br>所以选A</p>
+<h3 id="6-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#6-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="6.What is the result of this expression? (or multiple ones)"></a>6.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var END = Math.pow(2, 53);</div><div class="line">var START = END - 100;</div><div class="line">var count = 0;</div><div class="line">for (var i = START; i &lt;= END; i++) &#123;</div><div class="line">    count++;</div><div class="line">&#125;</div><div class="line">console.log(count);</div><div class="line">        </div><div class="line">A.0</div><div class="line">B.100</div><div class="line">C.101</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察JavaScript中的安全整数范围<br><code>Number.MIN_SAFE_INTEGER</code>代表在JavaScript中最小的安全的<code>integer</code>型数字<code>-(2^53 - 1)</code>.<br><code>Number.MAX_SAFE_INTEGER</code>代表在JavaScript中最大的安全整数<code>(2^53 - 1)</code>。<br>这个数字形成的原因是，Javascript 使用 IEEE 754 中规定的<code>double-precision floating-point format numbers</code>，在这个规定中能安全的表示数字的范围在<code>-(2^53 - 1)</code>到<code>2^53 - 1</code>之间，包含<code>-(2^53 - 1)</code>和<code>2^53 - 1</code>。<br>2^53+1 与 2^53超过安全整数范围，<code>2^53+1 == 2^53//true</code>,所以为无限循环，选D</p>
+<h3 id="7-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#7-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="7.What is the result of this expression? (or multiple ones)"></a>7.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var ary = [0,1,2];</div><div class="line">ary[10] = 10;</div><div class="line">ary.filter(function(x) &#123; return x === undefined;&#125;);</div><div class="line">        </div><div class="line">A.[undefined × 7]</div><div class="line">B.[0, 1, 2, 10]</div><div class="line">C.[]</div><div class="line">D.[undefined]</div></pre></td></tr></table></figure>
+<p>考察<code>filter</code>函数<br><code>filter</code>函数中<code>callback</code>只会在已经赋值的索引上被调用，对于那些已经被删除或者从未被赋值的索引不会被调用。<br>所以选C</p>
+<h3 id="8-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#8-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="8.What is the result of this expression? (or multiple ones)"></a>8.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var two   = 0.2</div><div class="line">var one   = 0.1</div><div class="line">var eight = 0.8</div><div class="line">var six   = 0.6</div><div class="line">[two - one == one, eight - six == two]</div><div class="line">        </div><div class="line">A.[true, true]</div><div class="line">B.[false, false]</div><div class="line">C.[true, false]</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察js大数和浮点数精度丢失的问题<br>计算机的二进制实现和位数限制有些数无法有限表示。就像一些无理数不能有限表示，如 圆周率 3.1415926…，1.3333… 等。JS 遵循 IEEE 754 规范，采用双精度存储（double precision），占用 64 bit。<br>解决方案：<br>对于整数，前端出现问题的几率可能比较低，毕竟很少有业务需要需要用到超大整数，只要运算结果不超过 Math.pow(2, 53) 就不会丢失精度。<br>对于小数，前端出现问题的几率还是很多的，尤其在一些电商网站涉及到金额等数据。解决方式：把小数放到位整数（乘倍数），再缩小回原来倍数（除倍数）<br>选择C，没有道理，时而准确时而不准，忧伤</p>
+<h3 id="9-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#9-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="9.What is the result of this expression? (or multiple ones)"></a>9.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function showCase(value) &#123;</div><div class="line">    switch(value) &#123;</div><div class="line">    case &apos;A&apos;:</div><div class="line">        console.log(&apos;Case A&apos;);</div><div class="line">        break;</div><div class="line">    case &apos;B&apos;:</div><div class="line">        console.log(&apos;Case B&apos;);</div><div class="line">        break;</div><div class="line">    case undefined:</div><div class="line">        console.log(&apos;undefined&apos;);</div><div class="line">        break;</div><div class="line">    default:</div><div class="line">        console.log(&apos;Do not know!&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">showCase(new String(&apos;A&apos;));</div><div class="line">        </div><div class="line">A.Case A</div><div class="line">B.Case B</div><div class="line">C.Do not know!</div><div class="line">D.undefined</div></pre></td></tr></table></figure>
+<p>考察<code>switch()</code>和判等<br><code>switch()</code>使用<code>===</code>判等，而<code>new String(&#39;A&#39;)!==&#39;A&#39;</code>,所以选C</p>
+<h3 id="10-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#10-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="10.What is the result of this expression? (or multiple ones)"></a>10.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function showCase2(value) &#123;</div><div class="line">    switch(value) &#123;</div><div class="line">    case &apos;A&apos;:</div><div class="line">        console.log(&apos;Case A&apos;);</div><div class="line">        break;</div><div class="line">    case &apos;B&apos;:</div><div class="line">        console.log(&apos;Case B&apos;);</div><div class="line">        break;</div><div class="line">    case undefined:</div><div class="line">        console.log(&apos;undefined&apos;);</div><div class="line">        break;</div><div class="line">    default:</div><div class="line">        console.log(&apos;Do not know!&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">showCase2(String(&apos;A&apos;));</div><div class="line">        </div><div class="line">A.Case A</div><div class="line">B.Case B</div><div class="line">C.Do not know!</div><div class="line">D.undefined</div></pre></td></tr></table></figure>
+<p>考察<code>String()</code>方法和判等<br><code>String(&#39;A&#39;)</code>没有新建一个对象，而是返回一个<code>String</code>，所以选A</p>
+<hr>
+<p>2017.08.16更新</p>
+<hr>
+<h3 id="11-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#11-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="11.What is the result of this expression? (or multiple ones)"></a>11.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function isOdd(num) &#123;</div><div class="line">    return num % 2 == 1;</div><div class="line">&#125;</div><div class="line">function isEven(num) &#123;</div><div class="line">    return num % 2 == 0;</div><div class="line">&#125;</div><div class="line">function isSane(num) &#123;</div><div class="line">    return isEven(num) || isOdd(num);</div><div class="line">&#125;</div><div class="line">var values = [7, 4, &apos;13&apos;, -9, Infinity];</div><div class="line">values.map(isSane);</div><div class="line"></div><div class="line">A.[true, true, true, true, true]</div><div class="line">B.[true, true, true, true, false]</div><div class="line">C.[true, true, true, false, false]</div><div class="line">D.[true, true, false, false, false]</div></pre></td></tr></table></figure>
+<p>考察取余操作符<br>取余操作符保证符号，所以<code>-9 % 2 == -1 ，Infinity % 2 == NaN</code><br>所以选C</p>
+<h3 id="12-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#12-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="12.What is the result of this expression? (or multiple ones)"></a>12.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">parseInt(3, 8)</div><div class="line">parseInt(3, 2)</div><div class="line">parseInt(3, 0)</div><div class="line">        </div><div class="line">A.3, 3, 3</div><div class="line">B.3, 3, NaN</div><div class="line">C.3, NaN, NaN</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>parseInt()</code>函数，分析见第1题，答案应该为<code>3,NaN,3</code> 所以选D</p>
+<h3 id="13-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#13-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="13.What is the result of this expression? (or multiple ones)"></a>13.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Array.isArray( Array.prototype )</div><div class="line">        </div><div class="line">A.true</div><div class="line">B.false</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>Array.prototype</code>，是数组，所以选A</p>
+<h3 id="14-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#14-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="14.What is the result of this expression? (or multiple ones)"></a>14.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var a = [0];</div><div class="line">if ([0]) &#123;</div><div class="line">  console.log(a == true);</div><div class="line">&#125; else &#123;</div><div class="line">  console.log(&quot;wut&quot;);</div><div class="line">&#125;</div><div class="line">        </div><div class="line">A.true</div><div class="line">B.false</div><div class="line">C.&quot;wut&quot;</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>if()</code>和判等,见<a href="http://happylg.cn/2017/08/04/js-equal/">js相等性比较</a><br><code>if([])</code>都会执行，所以<code>if([0])</code>更会执行，对象和布尔值比较，布尔值转换为数字，对象转换为原始值比较,<code>[0] == true // false</code><br>所以选B</p>
+<h3 id="15-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#15-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="15.What is the result of this expression? (or multiple ones)"></a>15.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[]==[]</div><div class="line">        </div><div class="line">A.true</div><div class="line">B.false</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察相等性比较，见<a href="http://happylg.cn/2017/08/04/js-equal/">js相等性比较</a><br>对象和对象比较，引用相同返回<code>true</code>,否则返回<code>false</code>,所以选B</p>
+<h3 id="16-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#16-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="16.What is the result of this expression? (or multiple ones)"></a>16.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&apos;5&apos; + 3</div><div class="line">&apos;5&apos; - 3</div><div class="line">   </div><div class="line">A.&quot;53&quot;, 2</div><div class="line">B.8, 2</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>+</code>,<code>-</code>运算符,字符串会使用<code>+</code>运算符做连接，但是遇到<code>-</code>则转换为数值进行运算<br>所以选A </p>
+<h3 id="17-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#17-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="17.What is the result of this expression? (or multiple ones)"></a>17.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 + - + + + - + 1</div><div class="line">        </div><div class="line">A.2</div><div class="line">B.1</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察一元<code>+, -</code><br>中间一元加号不影响，两个一元减号负负得正变加号,所以选A</p>
+<h3 id="18-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#18-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="18.What is the result of this expression? (or multiple ones)"></a>18.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var ary = Array(3);</div><div class="line">ary[0]=2</div><div class="line">ary.map(function(elem) &#123; return &apos;1&apos;; &#125;);</div><div class="line">        </div><div class="line">A.[2, 1, 1]</div><div class="line">B.[&quot;1&quot;, &quot;1&quot;, &quot;1&quot;]</div><div class="line">C.[2, &quot;1&quot;, &quot;1&quot;]</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>map</code>函数<br>删除或未赋值的元素不会被遍历到，所以选D</p>
+<h3 id="19-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#19-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="19.What is the result of this expression? (or multiple ones)"></a>19.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function sidEffecting(ary) &#123;</div><div class="line">  ary[0] = ary[2];</div><div class="line">&#125;</div><div class="line">function bar(a,b,c) &#123;</div><div class="line">  c = 10</div><div class="line">  sidEffecting(arguments);</div><div class="line">  return a + b + c;</div><div class="line">&#125;</div><div class="line">bar(1,1,1)</div><div class="line">        </div><div class="line">A.3</div><div class="line">B.12</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察函数的<code>arguments</code><br>函数的<code>arguments</code>与参数是相对应的，但不是同一片内存空间，所以答案为21，选D</p>
+<h3 id="20-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#20-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="20.What is the result of this expression? (or multiple ones)"></a>20.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = 111111111111111110000,</div><div class="line">    b = 1111;</div><div class="line">a + b;</div><div class="line">        </div><div class="line">A.111111111111111111111</div><div class="line">B.111111111111111110000</div><div class="line">C.NaN</div><div class="line">D.Infinity</div></pre></td></tr></table></figure>
+<p>考察js的大数精度<br>js中的大数精度也缺失了，选B </p>
+<h3 id="21-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#21-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="21.What is the result of this expression? (or multiple ones)"></a>21.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var x = [].reverse;</div><div class="line">x();</div><div class="line"></div><div class="line">A.[]</div><div class="line">B.undefined</div><div class="line">C.error</div><div class="line">D.window</div></pre></td></tr></table></figure>
+<p>题目基于ECMA 262 (5.1)的浏览器环境，<code>[].reverse</code>返回<code>this</code>，被浏览器调用之后为<code>window</code>。<br>选D</p>
+<h3 id="22-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#22-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="22.What is the result of this expression? (or multiple ones)"></a>22.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Number.MIN_VALUE &gt; 0</div><div class="line">        </div><div class="line">A.false</div><div class="line">B.true</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>Number</code><br><code>Number.MIN_VALUE</code>是大于0的最小数，所以选B</p>
+<h3 id="23-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#23-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="23.What is the result of this expression? (or multiple ones)"></a>23.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[1 &lt; 2 &lt; 3, 3 &lt; 2 &lt; 1]</div><div class="line">        </div><div class="line">A.[true, true]</div><div class="line">B.[true, false]</div><div class="line">C.error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>&lt;</code>运算符<br><code>(1 &lt; 2) &lt; 3</code>,<code>1 &lt; 2 //true 转换为1</code> <code>1 &lt; 3 // true</code><br><code>(3 &lt; 2) &lt; 1</code>,<code>3 &lt; 2 //false 转换为0</code> <code>0 &lt; 1 //true</code><br>所以选A</p>
+<h3 id="24-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#24-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="24.What is the result of this expression? (or multiple ones)"></a>24.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// the most classic wtf</div><div class="line">2 == [[[2]]]</div><div class="line">        </div><div class="line">A.true</div><div class="line">B.false</div><div class="line">C.undefined</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<p>考察<code>==</code><br>对象和其他值比较时，会将对象转换为原始值，<code>[[[2]]]</code>转换原始值为2<br>所以返回<code>true</code></p>
+<hr>
+<p>2017.08.17更新</p>
+<hr>
+<h3 id="25-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#25-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="25.What is the result of this expression? (or multiple ones)"></a>25.What is the result of this expression? (or multiple ones)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">3.toString()</div><div class="line">3..toString()</div><div class="line">3...toString()</div><div class="line">        </div><div class="line">A.&quot;3&quot;, error, error</div><div class="line">B.&quot;3&quot;, &quot;3.0&quot;, error</div><div class="line">C.error, &quot;3&quot;, error</div><div class="line">D.other</div></pre></td></tr></table></figure>
+<h3 id="26-What-is-the-result-of-this-expression-or-multiple-ones"><a href="#26-What-is-the-result-of-this-expression-or-multiple-ones" class="headerlink" title="26.What is the result of this expression? (or multiple ones)"></a>26.What is the result of this expression? (or multiple ones)</h3><p>(function(){<br>  var x = y = 1;<br>})();<br>console.log(y);<br>console.log(x);</p>
+<p>1, 1<br>error, error<br>1, error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = /123/,<br>    b = /123/;<br>a == b<br>a === b</p>
+<p>true, true<br>true, false<br>false, false<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = [1, 2, 3],<br>    b = [1, 2, 3],<br>    c = [1, 2, 4]<br>a ==  b<br>a === b<br>a &gt;   c<br>a &lt;   c</p>
+<p>false, false, false, true<br>false, false, false, false<br>true, true, false, true<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = {}, b = Object.prototype;<br>[a.prototype === b, Object.getPrototypeOf(a) === b]</p>
+<p>[false, true]<br>[true, true]<br>[false, false]<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>function f() {}<br>var a = f.prototype, b = Object.getPrototypeOf(f);<br>a === b</p>
+<p>true<br>false<br>null<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>function foo() { }<br>var oldName = foo.name;<br>foo.name = “bar”;<br>[oldName, foo.name]</p>
+<p>error<br>[“”, “”]<br>[“foo”, “foo”]<br>[“foo”, “bar”]</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>“1 2 3”.replace(/\d/g, parseInt)</p>
+<p>“1 2 3”<br>“0 1 2”<br>“NaN 2 3”<br>“1 NaN 3”</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>function f() {}<br>var parent = Object.getPrototypeOf(f);<br>f.name // ?<br>parent.name // ?<br>typeof eval(f.name) // ?<br>typeof eval(parent.name) //  ?</p>
+<p>“f”, “Empty”, “function”, “function”<br>“f”, undefined, “function”, error<br>“f”, “Empty”, “function”, error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var lowerCaseOnly =  /^[a-z]+$/;<br>[lowerCaseOnly.test(null), lowerCaseOnly.test()]</p>
+<p>[true, false]<br>error<br>[true, true]<br>[false, true]</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>[,,,].join(“, “)</p>
+<p>“, , , “<br>“undefined, undefined, undefined, undefined”<br>“, , “<br>“”</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = {class: “Animal”, name: ‘Fido’};<br>a.class</p>
+<p>“Animal”<br>Object<br>an error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = new Date(“epoch”)</p>
+<p>Thu Jan 01 1970 01:00:00 GMT+0100 (CET)<br>current time<br>error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = Function.length,<br>    b = new Function().length<br>a === b</p>
+<p>true<br>false<br>error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = Date(0);<br>var b = new Date(0);<br>var c = new Date();<br>[a === b, b === c, a === c]</p>
+<p>[true, true, true]<br>[false, false, false]<br>[false, true, false]<br>[true, false, false]</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var min = Math.min(), max = Math.max()<br>min &lt; max</p>
+<p>true<br>false<br>error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>function captureOne(re, str) {<br>  var match = re.exec(str);<br>  return match &amp;&amp; match[1];<br>}<br>var numRe  = /num=(\d+)/ig,<br>    wordRe = /word=(\w+)/i,<br>    a1 = captureOne(numRe,  “num=1”),<br>    a2 = captureOne(wordRe, “word=1”),<br>    a3 = captureOne(numRe,  “NUM=2”),<br>    a4 = captureOne(wordRe,  “WORD=2”);<br>[a1 === a2, a3 === a4]</p>
+<p>[true, true]<br>[false, false]<br>[true, false]<br>[false, true]</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>var a = new Date(“2014-03-19”),<br>    b = new Date(2014, 03, 19);<br>[a.getDay() === b.getDay(), a.getMonth() === b.getMonth()]</p>
+<p>[true, true]<br>[true, false]<br>[false, true]<br>[false, false]</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>if (‘<a href="http://giftwrapped.com/picture.jpg&#39;.match(&#39;.gif" target="_blank" rel="external">http://giftwrapped.com/picture.jpg&#39;.match(&#39;.gif</a>‘)) {<br>  ‘a gif file’<br>} else {<br>  ‘not a gif file’<br>}</p>
+<p>‘a gif file’<br>‘not a gif file’<br>error<br>other</p>
+<p>What is the result of this expression? (or multiple ones)</p>
+<p>function foo(a) {<br>    var a;<br>    return a;<br>}<br>function bar(a) {<br>    var a = ‘bye’;<br>    return a;<br>}<br>[foo(‘hello’), bar(‘hello’)]</p>
+<p>[“hello”, “hello”]<br>[“hello”, “bye”]<br>[“bye”, “bye”]<br>other</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/12/js-function/" rel="next" title="Javascript中的Function对象总结">
+                <i class="fa fa-chevron-left"></i> Javascript中的Function对象总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/13/dynamic-programming/" rel="prev" title="动态规划">
+                动态规划 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="zxlg" />
+          <p class="site-author-name" itemprop="name">zxlg</p>
+           
+              <p class="site-description motion-element" itemprop="description">此时此身此地</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/zxlg1993" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      微博
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gongzhibin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">1.</span> <span class="nav-text">1.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">2.</span> <span class="nav-text">2.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">3.</span> <span class="nav-text">3.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">4.</span> <span class="nav-text">4.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">5.</span> <span class="nav-text">5.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">6.</span> <span class="nav-text">6.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">7.</span> <span class="nav-text">7.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">8.</span> <span class="nav-text">8.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">9.</span> <span class="nav-text">9.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">10.</span> <span class="nav-text">10.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">11.</span> <span class="nav-text">11.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">12.</span> <span class="nav-text">12.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">13.</span> <span class="nav-text">13.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">14.</span> <span class="nav-text">14.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">15.</span> <span class="nav-text">15.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">16.</span> <span class="nav-text">16.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">17.</span> <span class="nav-text">17.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">18.</span> <span class="nav-text">18.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">19.</span> <span class="nav-text">19.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">20.</span> <span class="nav-text">20.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">21.</span> <span class="nav-text">21.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">22.</span> <span class="nav-text">22.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">23.</span> <span class="nav-text">23.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">24.</span> <span class="nav-text">24.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">25.</span> <span class="nav-text">25.What is the result of this expression? (or multiple ones)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-What-is-the-result-of-this-expression-or-multiple-ones"><span class="nav-number">26.</span> <span class="nav-text">26.What is the result of this expression? (or multiple ones)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zxlg</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Mist
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://happylg.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://happylg.cn/2017/08/12/js-puzzlers/';
+          this.page.identifier = '2017/08/12/js-puzzlers/';
+          this.page.title = 'JavaScript Puzzlers解析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://happylg.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hR3ATs8pfE23chEpVt6B1ovg-gzGzoHsz", "oIbFkcd43Cjd1FqkymLs6o2D");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
