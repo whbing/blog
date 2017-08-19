@@ -1,9 +1,8 @@
 ---
 title: 《上帝掷骰子吗？——量子力学史话》读书笔记
 date: 2017-08-14 09:07:02
-tags:
-	- 读书
-categories:
+tags: [读书]
+categories: 
 	- 读书笔记
 ---
 

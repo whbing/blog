@@ -1,9 +1,8 @@
 ---
 title: 拖延症再见「转」
 date: 2016-10-23 13:41:35
-tags:
-	- 拖延症
-categories:
+tags: [拖延症]
+categories: 
 	- 转载
 ---
 # 拖延症你好

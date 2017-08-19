@@ -1,9 +1,8 @@
 ---
 title: Javascript操作DOM总结
 date: 2017-08-07 11:11:59
-tags:
-	- js
-categories:
+tags: [js]
+categories: 
 	- Javascript
 ---
 

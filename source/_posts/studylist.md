@@ -1,9 +1,8 @@
 ---
 title: 9月20日以前学习笔记
-tags:
-  - 学习笔记
+tags: [学习笔记]
 id: 3
-categories:
+categories: 
   - IT
 date: 2016-09-20 10:13:41
 ---

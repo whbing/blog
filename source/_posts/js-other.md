@@ -1,9 +1,8 @@
 ---
 title: Javascript零散笔记
 date: 2017-08-06 22:30:57
-tags:
-	- js
-categories:
+tags: [js]
+categories: 
 	- Javascript
 ---
 

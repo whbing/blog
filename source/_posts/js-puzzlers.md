@@ -2,7 +2,7 @@
 title: JavaScript Puzzlers解析
 date: 2017-08-12 21:22:18
 tags: [js]
-categories:
+categories: 
 	- Javascript
 ---
 

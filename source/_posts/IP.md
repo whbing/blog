@@ -1,10 +1,8 @@
 ---
 title: IP地址学习总结
 date: 2017-02-22 20:58:22
-tags:
-    - ip
-    - 网络
-categories:
+tags: [ip,网络]
+categories: 
     - 计算机网络
 ---
 

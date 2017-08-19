@@ -1,9 +1,8 @@
 ---
 title: 《自控力》读书笔记
 date: 2017-08-05 15:25:58
-tags:
-	- 读书
-categories:
+tags: [读书]
+categories: 
 	- 读书笔记
 ---
 

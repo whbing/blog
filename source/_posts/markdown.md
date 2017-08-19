@@ -1,9 +1,8 @@
 ---
 title: Markdown技巧
 date: 2017-08-04 10:11:44
-tags:
-    - Markdown
-categories:
+tags: [Markdown]
+categories: 
     - Markdown
 ---
 # 一、代码

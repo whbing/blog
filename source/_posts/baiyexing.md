@@ -1,9 +1,8 @@
 ---
 title: 读《白夜行》
 date: 2016-10-07 14:45:56
-tags:
-	- 读书
-categories:
+tags: [读书]
+categories: 
 	- 读书笔记
 ---
 

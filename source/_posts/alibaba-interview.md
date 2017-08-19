@@ -2,7 +2,7 @@
 title: 阿里巴巴在线笔试
 date: 2017-08-17 18:23:35
 tags: [js,html,css,interview]
-categories:
+categories: 
 	- Interview
 ---
 # 前端

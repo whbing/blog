@@ -1,9 +1,8 @@
 ---
 title: Javascript中的Function对象总结
 date: 2017-08-12 20:17:06
-tags:
-	- js
-categories:
+tags: [js]
+categories: 
 	- Javascript
 ---
 # 属性

@@ -1,9 +1,8 @@
 ---
 title: HTTP协议总结
 date: 2017-08-05 16:02:45
-tags:
-    - HTTP
-categories:
+tags: [http,网络]
+categories: 
     - 网络
 ---
 ## HTTP

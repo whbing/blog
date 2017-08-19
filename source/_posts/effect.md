@@ -1,9 +1,8 @@
 ---
 title: 《影响力》读书笔记
 date: 2017-08-05 15:27:48
-tags:
-	- 读书
-categories:
+tags: [读书]
+categories: 
 	- 读书笔记
 ---
 

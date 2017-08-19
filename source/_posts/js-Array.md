@@ -1,9 +1,8 @@
 ---
 title: Javascript中的Array对象总结
 date: 2017-08-03 18:23:35
-tags:
-	- js
-categories:
+tags: [js]
+categories: 
 	- Javascript
 ---
 # 一、属性

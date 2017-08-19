@@ -1,10 +1,8 @@
 ---
 title: 前端面试总结
 date: 2017-08-09 10:31:06
-tags:
-    - 前端
-    - interview
-categories:
+tags: [前端,interview]
+categories: 
 	- Interview
 ---
 
@@ -15,7 +13,7 @@ categories:
 
 # 二、技术性问题
 
-
+<!--more-->
 ## JS类问题
 ### 作用域
 ### 原型

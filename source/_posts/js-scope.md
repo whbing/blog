@@ -1,9 +1,8 @@
 ---
 title: Javascript函数和作用域总结
 date: 2017-08-05 22:53:00
-tags: 
-	- js
-categories:
+tags: [js]
+categories: 
     - Javascript
 ---
 
