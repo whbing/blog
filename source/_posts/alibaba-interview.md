@@ -5,7 +5,6 @@ tags:
 	- js
     - html
     - css
-    - 前端
     - interview
 categories:
 	- Interview
