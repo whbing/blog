@@ -29,9 +29,9 @@ Jekyll now ignores the vendor and node_modules directories by default.
     更新作者的最新程序(不建议自己有较大改动的进行此操作)。
 
 ## 其他
-    1. 修改搜索菜单
-    2. 添加canvas
-    3. 添加文章更新时间
+1. 修改搜索菜单
+2. 添加canvas
+3. 添加文章更新时间
 
 ## 参考文献：
 1. [NexT主题升级](https://github.com/iissnan/hexo-theme-next/issues/328)
