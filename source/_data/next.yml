@@ -253,7 +253,11 @@ local_search:
 #duoshuo_shortname: zxlg1
 
 # Disqus
-disqus_shortname: happylg
+# disqus_shortname: happylg #5.01版本
+disqus:
+  enable: enable
+  shortname: happylg
+  count: false
 
 # Baidu Share
 # Available value:

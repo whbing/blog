@@ -326,7 +326,7 @@ han: false
 disqus:
   enable: enable
   shortname: happylg
-  count: true
+  count: false
 
 # Hypercomments
 #hypercomments_id:
