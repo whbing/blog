@@ -484,6 +484,9 @@ D.other
 比较引用值得到相等性，比较基于标准字典的Unicode值得到关系型
 选A
 
+____________________
+2017.08.20更新
+____________________
 ### 29.What is the result of this expression? (or multiple ones)
 ```
 var a = {}, b = Object.prototype;
@@ -494,6 +497,9 @@ B.[true, true]
 C.[false, false]
 D.other
 ```
+考察原型和原型对象
+`Object.getPrototypeOf()`方法返回指定对象的原型，即实例对象内部的`_proto_`属性,即我们常说的原型链，所有对象的原型均从`Object`继承而来。如果没有继承属性，则返回 `null`。
+`prototype`为原型对象，只有`Function`对象有，其他对象都没有
 
 
 ### 30.What is the result of this expression? (or multiple ones)
@@ -507,33 +513,62 @@ B.false
 C.null
 D.other
 ```
+考察原型和原型对象
+函数原型对象：
+```
+Function.prototype = {
+    constructor : Function,
+    __proto__ : parent prototype,//原型对象为了实现继承的
+    some prototype properties: ...
+};
+```
+而`Object.getPrototypeOf()`返回对象的原型
+即`_proto_`,这个属性是对象本身为了实现继承的，是指向父对象的原型对象。选B
+<div align="center">
+![函数的原型对象和原型](/img/函数原型对象和原型.png)
+<P>函数的原型对象和原型</P>
+</div>
 
-What is the result of this expression? (or multiple ones)
 
-          
+### 31.What is the result of this expression? (or multiple ones)
+```   
 function foo() { }
 var oldName = foo.name;
 foo.name = "bar";
 [oldName, foo.name]
         
-error
-["", ""]
-["foo", "foo"]
-["foo", "bar"]
+A.error
+B.["", ""]
+C.["foo", "foo"]
+D.["foo", "bar"]
+```
+考察函数名的只读性
+函数名只读，不可修改，但是js里对其修改不报错，很奇怪。选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 32.What is the result of this expression? (or multiple ones)
+```
 "1 2 3".replace(/\d/g, parseInt)
         
-"1 2 3"
-"0 1 2"
-"NaN 2 3"
-"1 NaN 3"
+A."1 2 3"
+B."0 1 2"
+C."NaN 2 3"
+D."1 NaN 3"
+```
+考察`replace`和`parseInt`函数
+replace函数中第二个参数为function函数，function函数的参数：
+- `match`
+    匹配的子串。(对应于上述的$&。)
+- `p1,p2, ...	`
+    假如`replace()`方法的第一个参数是一个RegExp 对象，则代表第n个括号匹配的字符串。（对应于上述的$1，$2等。）
+- `offset`
+    匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是“abcd”，匹配到的子字符串是“bc”，那么这个参数将是1）
+- `string`
+    被匹配的原字符串。
+所以parseInt()接收到的参数是[1,0],[2,2],[3,4],得到"1 NaN 3",选D
 
-What is the result of this expression? (or multiple ones)
 
-          
+### 33.What is the result of this expression? (or multiple ones)
+```  
 function f() {}
 var parent = Object.getPrototypeOf(f);
 f.name // ?
@@ -541,92 +576,114 @@ parent.name // ?
 typeof eval(f.name) // ?
 typeof eval(parent.name) //  ?
         
-"f", "Empty", "function", "function"
-"f", undefined, "function", error
-"f", "Empty", "function", error
-other
+A."f", "Empty", "function", "function"
+B."f", undefined, "function", error
+C."f", "Empty", "function", error
+D.other
+```
+考察函数的原型
+`parent.name`为函数原型的名字，即原型链指向的上一原型对象的名字，返回空字符串，这个对象被定义了，但是不在这个作用域中。选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 34.What is the result of this expression? (or multiple ones)
+```
 var lowerCaseOnly =  /^[a-z]+$/;
 [lowerCaseOnly.test(null), lowerCaseOnly.test()]
         
-[true, false]
-error
-[true, true]
-[false, true]
+A.[true, false]
+B.error
+C.[true, true]
+D.[false, true]
+```
+考察正则表达式对象的`test()`方法
+参数为空时，将其转化为字符`undefined`，所以选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 35.What is the result of this expression? (or multiple ones)
+```  
 [,,,].join(", ")
         
-", , , "
-"undefined, undefined, undefined, undefined"
-", , "
-""
+A.", , , "
+B."undefined, undefined, undefined, undefined"
+C.", , "
+D.""
+```
+考察数组长度问题
+js定义数组允许在数组末尾加逗号，所以这个数组的长度为3，3个`undefined`
+所以选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 36.What is the result of this expression? (or multiple ones)
+```  
 var a = {class: "Animal", name: 'Fido'};
 a.class
         
-"Animal"
-Object
-an error
-other
+A."Animal"
+B.Object
+C.an error
+D.other
+```
+考察对象的`class`浏览器兼容性问题
+除了IE均返回`"Animal"`,IE紧张保留字作为对象的属性
+所以选D
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 37.What is the result of this expression? (or multiple ones)
+```   
 var a = new Date("epoch")
         
-Thu Jan 01 1970 01:00:00 GMT+0100 (CET)
-current time
-error
-other
+A.Thu Jan 01 1970 01:00:00 GMT+0100 (CET)
+B.current time
+C.error
+D.other
+```
+考察`Date`对象
+创建`Date`实例可使用`new Date(dateString)`,`dateString`需符合[RFC2822](http://tools.ietf.org/html/rfc2822#page-14)格式，否则返回`NaN`
+所以选D
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 38.What is the result of this expression? (or multiple ones)
+```   
 var a = Function.length,
     b = new Function().length
 a === b
         
-true
-false
-error
-other
+A.true
+B.false
+C.error
+D.other
+```
+考察函数的长度
+`Function.length`定义为1，而函数原型的长度为0
+所以选B
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 39.What is the result of this expression? (or multiple ones)
+```    
 var a = Date(0);
 var b = new Date(0);
 var c = new Date();
 [a === b, b === c, a === c]
         
-[true, true, true]
-[false, false, false]
-[false, true, false]
-[true, false, false]
+A.[true, true, true]
+B.[false, false, false]
+C.[false, true, false]
+D.[true, false, false]
+```
+考察Date对象
+参见[Date对象](http://happylg.cn/2017/08/06/js-other/#Date对象)
+选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 40.What is the result of this expression? (or multiple ones)
+```  
 var min = Math.min(), max = Math.max()
 min < max
         
-true
-false
-error
-other
+A.true
+B.false
+C.error
+D.other
+```
+`Math.min()//Inifinty`,`Math.max()//-Inifinty`
+所以选择B
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 41.What is the result of this expression? (or multiple ones)
+**重点**
+```   
 function captureOne(re, str) {
   var match = re.exec(str);
   return match && match[1];
@@ -639,40 +696,49 @@ var numRe  = /num=(\d+)/ig,
     a4 = captureOne(wordRe,  "WORD=2");
 [a1 === a2, a3 === a4]
         
-[true, true]
-[false, false]
-[true, false]
-[false, true]
+A.[true, true]
+B.[false, false]
+C.[true, false]
+D.[false, true]
+```
+考察正则表达式对象的`/g`使用和`match()`方法
+match 使用全局（global）标志，一次返回所有匹配项，即使是使用在不同的字符串中。所以`a3`为`null`。
+选择C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 42.What is the result of this expression? (or multiple ones)
+```
 var a = new Date("2014-03-19"),
     b = new Date(2014, 03, 19);
 [a.getDay() === b.getDay(), a.getMonth() === b.getMonth()]
         
-[true, true]
-[true, false]
-[false, true]
-[false, false]
+A.[true, true]
+B.[true, false]
+C.[false, true]
+D.[false, false]
+```
+考察`Date()`的获取属性的方法,参加[Date对象](http://happylg.cn/2017/08/06/js-other/#Date对象)
+用`new Date(year, month[, day[, hour[, minutes[, seconds[, milliseconds]]]]])`方法构造`Date`对象，月份从0开始，所以`a,b`表示的是不同的日子
+所以选D
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 43.What is the result of this expression? (or multiple ones)
+```
 if ('http://giftwrapped.com/picture.jpg'.match('.gif')) {
   'a gif file'
 } else {
   'not a gif file'
 }
         
-'a gif file'
-'not a gif file'
-error
-other
+A.'a gif file'
+B.'not a gif file'
+C.error
+D.other
+```
+考察`String.prototype.match()`方法和`if()`
+`String.prototype.match()`方法未匹配到返回`null`,匹配到返回`Array`。对参数非正则对象对其进行隐式转换，`'.gif'`中`.`匹配除回车之外的任意字符。
+所以选择A
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 44.What is the result of this expression? (or multiple ones)
+```
 function foo(a) {
     var a;
     return a;
@@ -683,7 +749,11 @@ function bar(a) {
 }
 [foo('hello'), bar('hello')]
         
-["hello", "hello"]
-["hello", "bye"]
-["bye", "bye"]
-other
+A.["hello", "hello"]
+B.["hello", "bye"]
+C.["bye", "bye"]
+D.other
+```
+考察变量提升和初始化
+变量提升，但是若变量已经存在于作用域中，那么就会移除变量定义，但是不会移除变量初始化。
+所以选B
