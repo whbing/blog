@@ -1,8 +1,8 @@
 ---
-title: 牛客网前端面经
+title: 牛客网前端面经合集
 date: 2017-08-19 21:56:07
 tags: [front,interview]
-categories: [interview]
+categories: [Interview]
 ---
 ## 拼多多一面面经
 https://www.nowcoder.com/discuss/32932?type=0&order=0&pos=13&page=1
