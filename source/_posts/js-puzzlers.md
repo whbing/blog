@@ -411,7 +411,7 @@ D.other
 所以返回`true`
 
 ______________
-2017.08.17更新
+2017.08.19更新
 ______________
 ### 25.What is the result of this expression? (or multiple ones)
 ```
@@ -424,38 +424,49 @@ B."3", "3.0", error
 C.error, "3", error
 D.other
 ```
+**我靠了**
+考察`Number`对象
+`3.x`表示数字`3`后面加上`x`的后缀，后缀可以为空，但是不可以为`3.toString()`
+所以`Number`对象使用`toString`方法，`Number`对象必须加上`()`,否则表示小数，这题很贼。
+选C
 
 
 ### 26.What is the result of this expression? (or multiple ones)
-
-          
+```          
 (function(){
   var x = y = 1;
 })();
 console.log(y);
 console.log(x);
         
-1, 1
-error, error
-1, error
-other
+A.1, 1
+B.error, error
+C.1, error
+D.other
+```
+考察匿名函数变量定义
+x为局部变量，y为全局变量
+所以选C
 
-What is the result of this expression? (or multiple ones)
 
-          
+### 27.What is the result of this expression? (or multiple ones)
+```
 var a = /123/,
     b = /123/;
 a == b
 a === b
         
-true, true
-true, false
-false, false
-other
+A.true, true
+B.true, false
+C.false, false
+D.other
+```
+考察对象比较
+两个对象比较 ==和===效果一样的，均比较引用是否相同
+所以选C
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 28.What is the result of this expression? (or multiple ones)
+```
 var a = [1, 2, 3],
     b = [1, 2, 3],
     c = [1, 2, 4]
@@ -464,34 +475,38 @@ a === b
 a >   c
 a <   c
         
-false, false, false, true
-false, false, false, false
-true, true, false, true
-other
+A.false, false, false, true
+B.false, false, false, false
+C.true, true, false, true
+D.other
+```
+考察数组比较
+比较引用值得到相等性，比较基于标准字典的Unicode值得到关系型
+选A
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 29.What is the result of this expression? (or multiple ones)
+```
 var a = {}, b = Object.prototype;
 [a.prototype === b, Object.getPrototypeOf(a) === b]
         
-[false, true]
-[true, true]
-[false, false]
-other
+A.[false, true]
+B.[true, true]
+C.[false, false]
+D.other
+```
 
 
-What is the result of this expression? (or multiple ones)
-
-          
+### 30.What is the result of this expression? (or multiple ones)
+```    
 function f() {}
 var a = f.prototype, b = Object.getPrototypeOf(f);
 a === b
         
-true
-false
-null
-other
+A.true
+B.false
+C.null
+D.other
+```
 
 What is the result of this expression? (or multiple ones)
 

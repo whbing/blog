@@ -103,3 +103,8 @@ isNaN(1 + undefined) // true
 
 ## switch
 `switch()`使用`===`判断相等
+______________
+2017.08.19更新
+______________
+## Number.prototype.toString()使用注意 
+`Number`对象使用`toString`方法，`Number`对象必须加上`()`,否则表示小数。不加括号会报错。
