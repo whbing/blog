@@ -9,6 +9,27 @@ categories:
 _________________________________
 2017.08.20更新
 _________________________________
+## String.prototype.match()
+### 语法
+```
+str.match(regexp);
+```
+### 参数
+`regexp`
+一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用`new RegExp(obj)`将其转换为一个`RegExp`。如果你未提供任何参数，直接使用`match()`，那么你会得到一个包含空字符串的`Array ：[""]`。
+### 返回值
+`array`
+一个包含了整个匹配结果以及任何括号捕获的匹配结果的`Array`；如果没有匹配项，则返回`null`。
+
+### 描述
+如果正则表达式没有`g`标志，则`str.match()`会返回和`RegExp.exec()`相同的结果。而且返回的`Array`拥有一个额外的`input`性，该属性包含被解析的原始字符串。另外，还拥有一个`index`属性，该属性表示匹配结果在原字符串中的索引（以0开始）。
+如果正则表达式包含`g`标志，则该方法返回一个`Array`，它包含所有匹配的子字符串而不是匹配对象。捕获组不会被返回(即不返回`index`属性和`input`属性)。如果没有匹配到，则返回`null`。
+
+### 注意
+如果你需要知道一个字符串是否匹配一个正则表达式`RegExp`，可使用`search()`。
+如果你只是需要第一个匹配结果，你可能想要使用`RegExp.exec()`。
+如果你想要获得捕获组，并且设置了全局标志，你需要用`RegExp.exec()`。
+
 ## String.prototype.replace()
 ### 语法
 ```
@@ -42,3 +63,6 @@ var newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);//'abc
 ```
 ### 返回值
 一个部分或全部匹配由替代模式所取代的新的字符串。
+
+## 参考文献
+1. [MDN-String](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
