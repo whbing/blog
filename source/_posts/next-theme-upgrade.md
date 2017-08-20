@@ -33,6 +33,14 @@ Jekyll now ignores the vendor and node_modules directories by default.
 2. 添加canvas
 3. 添加文章更新时间
 
+___________________________________
+2017.08.20更新
+___________________________________
+## hexo server无法访问
+可能是4000端口被占用
+`hexo sever -p 4001`更换其他端口
+
 ## 参考文献
 1. [NexT主题升级](https://github.com/iissnan/hexo-theme-next/issues/328)
 2. [vendors文件夹处理](https://github.com/iissnan/hexo-theme-next/issues/1214)
+3. [使用localhost:4000访问本地blog一直无响应](https://segmentfault.com/q/1010000003870970)
