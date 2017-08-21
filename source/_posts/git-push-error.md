@@ -20,6 +20,7 @@ fatal: Could not read from remote repository.
 Please make sure you have the correct access rights
 and the repository exists.
 ```
+<!-- more -->
 更改公钥再进行`push`依旧出错，测试SSH连接
 ```
 $ ssh -T git@github.com
