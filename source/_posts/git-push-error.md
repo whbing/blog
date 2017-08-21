@@ -20,7 +20,7 @@ fatal: Could not read from remote repository.
 Please make sure you have the correct access rights
 and the repository exists.
 ```
-更改公钥再进行`push`依旧出错
+更改公钥再进行`push`依旧出错，测试SSH连接
 ```
 $ ssh -T git@github.com
 ssh: connect to host github.com port 22: Connection timed out
