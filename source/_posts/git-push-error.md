@@ -38,7 +38,7 @@ url = git@github.com:username/repo.git
 ```
 url = https://username@github.com/username/repo.git
 ```
-
+`git push`需要填写用户名和密码
 回去使用宿舍网可以SSH上传，可能是学校网络出问题了，禁用了SSH的22端口导致的。
 
 
