@@ -8,17 +8,25 @@ categories: [Git]
 ## 操作过程
 校园网`git push`推送时出现
 ```
-ssh: connect to host github.com port 22: Connection timed out
+ssh_dispatch_run_fatal: Connection to 192.30.255.112: Software caused connection abort
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+FATAL Something's wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
+Error: ssh_dispatch_run_fatal: Connection to 192.30.255.112: Software caused connection abort
 fatal: Could not read from remote repository.
 
 Please make sure you have the correct access rights
 and the repository exists.
 ```
-更改公钥再进行`push`依旧超时
+更改公钥再进行`push`依旧出错
 ```
 $ ssh -T git@github.com
 ssh: connect to host github.com port 22: Connection timed out
+Hi gongzhibin! You've successfully authenticated, but GitHub does not provide shell access.
 ```
+连接成功
 
 git提供了https、git、ssh三种协议来读写。
 运行`git config --local -e`打开配置信息。
