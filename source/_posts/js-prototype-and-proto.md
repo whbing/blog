@@ -27,6 +27,7 @@ person1.sayName == person2.sayName; //true
 **这个连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间。**
 上述代码中`person1`和`person2`的`[[Prototype]]`指向构造函数的原型对象`Person.prototype`
 
+<!-- more -->
 ### 获取[[Prototype]]
 可以通过`isPrototypeOf()`方法来确定对象之间是否存在这种关系。从本质上讲，如果`[[Prototype]]`指向调用 `isPrototypeOf()`方法的对象（`Person.prototype`），那么这个方法就返回`true`。
 ```

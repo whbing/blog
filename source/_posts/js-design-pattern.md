@@ -26,6 +26,8 @@ var person2 = createPerson('zxlg',24);
 ```
 工厂模式解决创建多个相似对象的问题，但是**没有解决对象识别的问题，即怎样知道一个变量的类型**
 
+
+<!-- more -->
 ## 构造函数模式
 ```
 function Person(name,age){
