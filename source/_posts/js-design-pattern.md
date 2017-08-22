@@ -131,16 +131,16 @@ Person.prototype = {
   constructor: Person,
   name: "zxlg",
   age: 24,
-  friends: ["Shelby", "Court"],
+  friends: ["whb", "zf"],
   sayName: function () {
     alert(this.name);
   }
 };
 var person1 = new Person();
 var person2 = new Person();
-person1.friends.push("Van");
-person1.friends; //"Shelby,Court,Van"
-person2.friends; //"Shelby,Court,Van"
+person1.friends.push("cm");
+person1.friends; //"whb", "zf", "cm"
+person2.friends; //"whb", "zf", "cm"
 person1.friends === person2.friends; //true
 ```
 在此，`Person.prototype`对象有一个名为`friends`的属性，该属性包含一个字符串数组。然后，创建了`Person`的两个实例。接着，修改了`person1.friends`引用的数组，向数组中添加了一个字符串。由于`friends`数组存在于`Person.prototype`而非`person1`中，所以刚刚提到的修改也会通过`person2.friends`（与`person1.friends`指向同一个数组）反映出来。假如我们的初衷就是像这样在所有实例中共享一个数组，那么对这个结果我没有话可说。可是，实例一般都是要有属于自己的全部属性的。而这正是单独使用原型模式的问题所在。
