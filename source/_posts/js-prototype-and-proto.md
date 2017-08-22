@@ -35,8 +35,10 @@ Person.prototype.isPrototypeOf(person1); //true
 Person.prototype.isPrototypeOf(person2); //true
 ```
 可以通过`Object.getPrototypeOf()`方法返回`[[Prototype]]`的值。
+```
 Object.getPrototypeOf(person1) == Person.prototype; //true
 Object.getPrototypeOf(person1).name; //"zxlg"
+```
 
 ### 原型链
 每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返回该属性的值；如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。如果在原型对象中找到了这个属性，则返回该属性的值。直到最顶端，也就是原型链的实现过程。
