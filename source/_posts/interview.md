@@ -6,7 +6,7 @@ categories:
 	- Interview
 ---
 
-# 一、开放性题目
+# 一、开放性问题
 ## 为什么选择前端？
 
 ## 项目遇到的问题及如何解决？
@@ -48,6 +48,17 @@ categories:
     答：可以，canvas原生的toDataURL()方法获取图像的Base64编码
 
 
+_________________________________
+2017-08-22更新
+_________________________________
+### 两栏布局，左边固定，要求先加载内容区域，说出多种方法
+1. [圣杯布局](http://happylg.cn/2017/08/22/css-double-columns-and-three-columns/#圣杯布局)
+2. [双飞翼布局](http://happylg.cn/2017/08/22/css-double-columns-and-three-columns/#float-负margin-双飞翼布局)
+3. [flex布局]()
+
+### 如何实现Bootstrap的栅格布局
+
+
 ## 计算机网络问题
 ### HTTP、HTTPS协议
 ### TCP/IP协议
@@ -75,3 +86,6 @@ categories:
 ## 数据结构和算法
 1. 快速排序
 2. 二叉排序树
+
+参考文献：
+1. [两列布局分析](https://theqwang.github.io/2016/01/07/%E4%B8%A4%E5%88%97%E5%B8%83%E5%B1%80%E5%88%86%E6%9E%90/)
