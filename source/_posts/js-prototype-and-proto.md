@@ -80,6 +80,33 @@ friend.constructor == Object; //true
 ```
 如果`constructor`的值真的很重要，可以将其加入`prototype`中,并使用`Object.defineProperty()`将其`[[Enumerable]]`特性被设置为`false`
 
+### 原型的动态性
+由于在原型中查找值的过程是一次搜索，因此我们对原型对象所做的任何修改都能够立即从实例上反映出来——即使是先创建了实例后修改原型也照样如此。
+```
+var friend = new Person();
+Person.prototype.sayHi = function(){
+	alert("hi");
+};
+friend.sayHi(); //"hi"（没有问题！）
+```
+尽管可以随时为原型添加属性和方法，并且修改能够立即在所有对象实例中反映出来，但如果是重写整个原型对象，那么情况就不一样了。调用构造函数时会为实例添加一个指向最初原型的`[[Prototype]]`指针，而把原型修改为另外一个对象就等于切断了构造函数与最初原型之间的联系。
+**实例中的指针仅指向原型，而不指向构造函数。**
+```
+function Person() {
+}
+var friend = new Person();
+Person.prototype = {
+  constructor: Person,
+  name: "zxlg",
+  age: 24,
+  sayName: function () {
+    alert(this.name);
+  }
+};
+friend.sayName(); //error
+```
+重写原型对象切断了现有原型与任何之前已经存在的对象实例之间的联系，它们引用的仍然是最初的原型
+
 ## 原生对象的原型
 所有原生的引用类型都是采用这种模式创建的。所有原生引用类型（`Object`、` Array`、 `String`，等等）都在其构造函数的原型上定义了方法。
 

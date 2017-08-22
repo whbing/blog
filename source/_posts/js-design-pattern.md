@@ -63,15 +63,15 @@ person2 instanceof Person; //true
 ### 构造函数当作函数
 ```
 // 当作构造函数使用
-var person = new Person("Nicholas", 29, "Software Engineer");
-person.sayName(); //"Nicholas"
+var person = new Person("liuli", 23);
+person.sayName(); //"liuli"
 // 作为普通函数调用
-Person("Greg", 27, "Doctor"); // 添加到 window
-window.sayName(); //"Greg"
+Person("zhangfan", 26); // 添加到 window
+window.sayName(); //"zhangfan"
 // 在另一个对象的作用域中调用
 var o = new Object();
-Person.call(o, "Kristen", 25, "Nurse");
-o.sayName(); //"Kristen"
+Person.call(o, "chenming", 24);
+o.sayName(); //"chenming"
 ```
 不使用`new`操作符调用`Person()`会出现什么结果：属性和方法都被添加给`window`对象了。也可以使用`call()`（或者 `apply()`）在某个特殊对象的作用域中调用`Person()`函数。
 
