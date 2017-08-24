@@ -7,7 +7,7 @@ categories: [Node]
 
 ## 原因
 因为ES6的兴起，很多新特性在浏览器中实现不了，甚至低版本的node也不能实现，所以需要一个node版本管理工具，[nvm](https://github.com/creationix/nvm)不支持windows，但[nvm-windows](https://github.com/coreybutler/nvm-windows)支持，也持续在更新。
-
+<!-- more -->
 ## 安装nvm-windows
 
 1. nvm-windows发行版`nvm_noinstall.zip`[下载](https://github.com/coreybutler/nvm-windows/releases)
