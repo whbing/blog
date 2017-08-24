@@ -9,7 +9,7 @@ categories: [CSS]
 ## 文档类型
 ## DOCTYP切换
 ## 浏览器模式
-
+<!-- more -->
 # CSS选择器
 ## 常用选择器
 类型选择器
