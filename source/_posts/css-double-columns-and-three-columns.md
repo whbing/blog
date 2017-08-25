@@ -1,7 +1,7 @@
 ---
 title: CSS定宽+自适应布局
 date: 2017-08-22 17:45:25
-tags: [css,双飞翼布局，圣杯布局]
+tags: [css,双飞翼布局,圣杯布局]
 categories: [CSS]
 ---
 
