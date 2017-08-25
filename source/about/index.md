@@ -1,5 +1,5 @@
 ---
-title: about
+title: 关于
 date: 2016-09-26 15:30:36
 ---
 
