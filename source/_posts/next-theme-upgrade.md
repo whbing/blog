@@ -2,7 +2,7 @@
 title: NexT主题升级
 date: 2017-08-19 16:56:25
 tags: [hexo,NexT]
-category: [建站日志]
+category: [Hexo]
 ---
 
 ## 版本升级
