@@ -324,7 +324,7 @@ han: false
 
 # Disqus
 disqus:
-  enable: enable
+  enable: true
   shortname: happylg
   count: false
 
