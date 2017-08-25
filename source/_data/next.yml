@@ -254,10 +254,10 @@ local_search:
 
 # Disqus
 # disqus_shortname: happylg #5.01版本
-disqus:
-  enable: enable
-  shortname: happylg
-  count: false
+# disqus:
+#   enable: enable
+#   shortname: happylg
+#   count: false
 
 # Baidu Share
 # Available value:
