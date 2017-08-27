@@ -12,7 +12,7 @@ Digital Ocean
 ## 部署ss服务端
 ### 安装
 shadowsocks python版本安装
-shadowsocks-libev安装，[参见](https://github.com/shadowsocks/shadowsocks-libev)
+shadowsocks-libev安装，[参见shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev)
 <!-- more -->
 shadowsocks-libev正常配置出错，后卸载使用一键脚本安装，参见[shadowsocks libev 一键安装](https://github.com/iMeiji/shadowsocks_install/wiki/shadowsocks-libev-%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85)
 
@@ -25,16 +25,12 @@ shadowsocks-libev正常配置出错，后卸载使用一键脚本安装，参见
 重启：`/etc/init.d/shadowsocks restart`
 查看状态：`/etc/init.d/shadowsocks status`
 
-### 加密方式
-rc4-md5
-aes-256-cfb
-chacha20
 ## 开启bbr
 [开启TCP BBR拥塞控制算法](https://github.com/iMeiji/shadowsocks_install/wiki/%E5%BC%80%E5%90%AFTCP-BBR%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95)
 ## 部署ss客户端
 [Shadowsocks for Windows](https://github.com/shadowsocks/shadowsocks-windows/releases)
 ## 配置chrome
-switch omega系统代理可以，自动切换出错：迅雷的问题，[参见github issue](https://github.com/FelisCatus/SwitchyOmega/issues/557)
+Switchyomega可以系统代理，自动切换出错：迅雷的问题，[参见github issue](https://github.com/FelisCatus/SwitchyOmega/issues/557)
 ## 配置手机版本
 影梭
 # XX-net
