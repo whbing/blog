@@ -14,7 +14,7 @@ Digital Ocean
 shadowsocks python版本安装
 shadowsocks-libev安装，[参见shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev)
 <!-- more -->
-shadowsocks-libev正常配置出错，后卸载使用一键脚本安装，参见[shadowsocks libev 一键安装](https://github.com/iMeiji/shadowsocks_install/wiki/shadowsocks-libev-%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85)
+shadowsocks-libev正常配置出错，后卸载使用一键脚本安装，参见[shadowsocks libev 一键安装](https://github.com/iMeiji/shadowsocks_install/wiki/shadowsocks-libev-%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85)，之后也可通过`vim /etc/shadowsocks-libev/config.json`配置服务端
 
 ### 卸载方法
 使用 root 用户登录，运行以下命令：`./shadowsocks-libev.sh uninstall`
