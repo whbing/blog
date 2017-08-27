@@ -1,14 +1,13 @@
 ---
-title: 9月20日以前学习笔记
-tags: [学习笔记]
-id: 3
-categories: 
-  - IT
+title: 零散笔记
+tags: [学习笔记,IT]
+categories: [其他] 
 date: 2016-09-20 10:13:41
 ---
 
 <div>
 
+# 2016.09.20之前笔记
 ## 学习笔记##
 
 **7.10** **sass和compass**:Sass是一个CSS3的扩展语言，它提供了丰富的特性使得编写样式更加容易：嵌套样式，变量定义，扩展，mixin等等;Compass是一个使用了Sass的库，它将很多常用样式打包成了一些模块，我们可以在自己的项目中使用这些模块，比如模块reset可以用来将不同浏览器的差异抹平,css3则用来生成CSS3相关的属性等$ gem install compass$ compass create projectNamesublime插件:emmet,html-css-js
@@ -51,3 +50,14 @@ sudo chmod -R 775 /var/www/wordpress `
 这样就完全解决问题了.注意了,不需要把/var/www/目录的所有者也设置为www-data,而只需要设置wordpress文件夹的所有者.wp-config.php里加入下面代码:` define("FS_METHOD","direct"); define("FS_CHMOD_DIR",0777); define("FS_CHMOD_FILE",0777);`
 </div>
 &nbsp;
+
+__________________
+2017-08-27更新
+__________________
+# 2017-08-27之后笔记
+## unbuntu引导设置默认
+由于双系统问题，每次启动都需要手动选择启动，查阅资料发现可以对其引导项默认值进行修改，`sudo vim /etc/default/grub`打开grub文件进行修改，`GRUB_DEFAULT=0`修改为想要默认启动的序号，序号默认从0开始，我的windows为第五项序号为4改为`GRUB_DEFAULT=4`
+
+## vps中的shadowsocks版本更换
+由于之前python版本的shadowsocks经常自动关闭，而且现在更新也不够及时，选择shadowsocks-libev
+[参见 安装shadowsocks-libev](http://happylg.cn/2017/08/27/right-to-Internet/#安装)
