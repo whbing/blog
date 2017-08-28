@@ -1,8 +1,7 @@
 ---
 title: 动态规划
 date: 2017-08-13 14:03:14
-tags: 
-    - 算法
+tags: [算法,动态规划]
 categories: 
     - 算法
 ---
@@ -152,7 +151,90 @@ public class ChangeMoney {
 ## 硬币找零(最少硬币数)
 ## 多重背包
 
-## 最长子序列
+____________________________
+2017-08-28更新
+____________________________
+## 最长递增子序列
+### 动态规划法
+```javascript
+//普通dp算法，复杂度为n^2
+function longest_increasing_subsequence_1(arr) {
+    //时间复杂度为n^2
+    let dp = [];
+    for (let i = 0; i < arr.length; i++) {
+        dp[i] = 1;
+    }
+    let max = 0;
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (arr[j] < arr[i]) {
+                dp[i] = Math.max(dp[j] + 1, dp[i]);
+            }
+        }
+        max = Math.max(max, dp[i]);
+    }
+    return max;
+}
+
+```
+
+### 改进的二分查找法
+
+```javascript
+//二分查找，复杂度为nlogn
+function longest_increasing_subsequence_2(arr) {
+    //时间复杂度为nlogn
+	//minNum存储的是长度为 index+1 的最小末尾值
+	//当arr[i]比minNum数组的最后一个数还大时
+	//minNum数组长度加1,其最小末尾为arr[i]
+	//这样保证minNum数组的值是有序排列的
+	//当arr[i]比比minNum数组的最后一个数小时,
+	//对minNum有序数组进行二分查找
+	//并将最终找到的右边界返回，将其值改为arr[i]
+	//保证了minNum数组存储的一直为最小末尾
+	//即相同长度的子序列，选择末尾较小的填入
+	//以保证minNum数组一直有序
+    let minNum = [];
+    for (let i = 0; i < arr.length; i++) {
+        length = minNum.length;
+        if (arr[i] > minNum[length - 1] || minNum[length - 1] == undefined) {
+            minNum[length] = arr[i];
+        } else {
+            //二分查找
+            let change_index = binary_search(minNum,arr[i]);
+            minNum[change_index] = arr[i];
+        }
+    }
+    return minNum.length;
+}
+
+function binary_search(arr,search_num){
+    let seek_left = 0;
+    let seek_right = arr.length - 1;
+    let half_length = Math.floor((seek_left + seek_right) / 2);
+    while ((seek_right - seek_left) > 1) {
+        if (arr[half_length] < search_num) {
+            seek_left = Math.floor((seek_left + seek_right) / 2);
+        } else if (arr[half_length] > search_num) {
+            seek_right = Math.floor((seek_left + seek_right) / 2);
+        } else {
+            seek_right = half_length;
+            break;
+        }
+        half_length = Math.floor((seek_left + seek_right) / 2);
+    }
+    return seek_right;
+}
+
+```
+
+
+## 最长公共子序列
+## 地牢游戏
+```javascript
+
+
+```
 ## 参考文献
 1. [背包问题九讲](http://love-oriented.com/pack/)
 2. [动态规划之背包问题](http://www.hawstein.com/posts/dp-knapsack.html)
