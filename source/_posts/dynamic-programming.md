@@ -20,7 +20,7 @@ ______________
 注意讨论前`i`个物品装入背包的时候， 其实是在考查第`i-1`个物品装不装入背包（因为物品是从0开始编号的）
 <!--more-->
 ### 代码
-```
+```java
 public class Pack_01 {
 
 	public static void main(String[] args) {
@@ -61,7 +61,7 @@ public class Pack_01 {
 ### 状态转移方程
 `dp[i][j] = max(dp[i - 1][j - num * weight[i - 1]] + num * value[i - 1]) (0<=num * weight[i - 1]<=j)`
 ### 代码
-```
+```java
 public class Pack_full {
 
 	public static void main(String[] args) {
@@ -106,7 +106,7 @@ ______________
 不装入第i种钱币，即使用0~i-1种钱币组成j的方法数；装入i钱币，使用0~i的钱币组成j-changes[i]金额的方法数
 `dp[i][j] = dp[i - 1][j] +  dp[i][j - changes[i]]`
 ### 代码
-```
+```java
 //链接：https://www.nowcoder.com/questionTerminal/185dc37412de446bbfff6bd21e4356ec
 //来源：牛客网
 //
@@ -154,6 +154,7 @@ public class ChangeMoney {
 ____________________________
 2017-08-28更新
 ____________________________
+## 最长公共子序列
 ## 最长递增子序列
 ### 动态规划法
 ```javascript
@@ -228,11 +229,45 @@ function binary_search(arr,search_num){
 
 ```
 
-
-## 最长公共子序列
 ## 地牢游戏
 ```javascript
+function count(arr) {
 
+    //dp[i][j]表示可以从点(i,j)到终点所需的最小能量
+    var dp = [];
+    //初始化数组中的每个值均为0
+    for (var i = 0; i < arr.length; i++) {
+        dp[i] = [];
+        for (var j = 0; j < arr[0].length; j++) {
+            dp[i][j] = 0;
+        }
+    }
+    //从后往前
+    for (var i = arr.length - 1; i >= 0; i--) {
+        for (var j = arr[0].length - 1; j >= 0; j--) {
+            //1.边缘情况和初始值
+            if (i == arr.length - 1 && j == arr[0].length - 1) {
+                dp[i][j] = Math.max(1, 1 - arr[i][j]);
+            } else if (i == arr.length - 1 && j != arr[0].length - 1) {
+                dp[i][j] = Math.max(1, dp[i][j + 1] - arr[i][j]);
+            } else if (i != arr.length - 1 && j == arr[0].length - 1) {
+                dp[i][j] = Math.max(1, dp[i + 1][j] - arr[i][j]);
+            } else {
+            //2.正常情况
+            //这个能量永远大于等于1，小于等于表示人已死
+            //从后往前表示往后的路径已知，那么到达该点的最小能量值也可确定
+            //从前往后因为无法确定之后的情况和路径所以不能判定该点的状态
+            //表示从右下两个的位置所需的最小能量减去该点获得的能量的最小值
+            //但需要比0大，有小于等于0的表示人已死
+            //状态转移方程如下
+                dp[i][j] = Math.max(1, Math.min(dp[i + 1][j], dp[i][j + 1]) - arr[i][j]);
+            }
+        }
+    }
+    return dp[0][0];
+
+
+}
 
 ```
 ## 参考文献
