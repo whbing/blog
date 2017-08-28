@@ -60,4 +60,4 @@ __________________
 
 ## vps中的shadowsocks版本更换
 由于之前python版本的shadowsocks经常自动关闭，而且现在更新也不够及时，选择shadowsocks-libev
-[参见 安装shadowsocks-libev](http://happylg.cn/2017/08/27/right-to-Internet/#安装)
+参见[安装shadowsocks-libev](http://happylg.cn/2017/08/27/right-to-Internet/#安装)
